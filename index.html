@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- George Chorny, 11/23, Hot Or Cold -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         
+        #logo{
+        display:inline-block; 
+        position: absolute;
+        top: 30px;
+        right: 300px;
+    
+            /* margin-left:30px; */
+        }
+        /* #numGuesses
+        {
+            
+        } */
+        .add
+        {
+            background-color: yellow;
+        }
+        .subtract
+        {
+            background-color: lightblue;
+        }
+        #reset{
+            background-color: blue;
+        }
+        .important{
+            background-color:purple;
+        }
+
+        html{
+            background-color:lightslategray;
+        }
+        @media screen and (min-width: 800px) {
+            body 
+            {
+                text-align:center;
+            }
+        }
+    </style>
+    <script>
+               function initialize(){
+        
+        numberOutput = document.getElementById("numberout");
+        guess = 50;
+ 
+        guessOutput = document.getElementById("numGuesses");
+        numGuesses = 5;
+ 
+        allGuessOutput = document.getElementById("showGuesses");
+        allGuesses = " "
+ 
+        allResponsesOutput = document.getElementById("responses");
+        allResponses = " "
+ 
+        answer =  Math.floor(Math.random() * 100);
+        
+        heat = 100;
+        gameEnded=false;
+        display();
+       }
+       
+       
+       function addOne()
+       {
+        if(guess>99|| numGuesses==0 || heat ==0){}
+        else{guess++;}
+       
+        display();
+       
+       }
+       function minusOne(){
+        if(guess<2|| numGuesses==0 || heat ==0){}
+        else{ guess--;}
+        display();
+       }
+       function addFive(){
+        if(guess>95|| numGuesses==0 || heat ==0 ){}
+        else{guess+=5;}
+       
+        display();
+       }
+       function minusFive(){
+        if(guess<6|| numGuesses==0 || heat ==0 ){}
+        else{guess-=5;}
+        display();
+       }
+       function addTen(){
+        if(guess>90|| numGuesses==0 || heat ==0 ){}
+        else{guess+=10;}    
+        display();
+       }
+       function minusTen(){
+        if(guess<11|| numGuesses==0  || heat ==0){}
+        else{guess-=10}  
+        display();
+       }
+       function addTwentyFive(){
+        if(guess>75|| numGuesses==0|| heat ==0 ){}
+        else{guess+=25;}
+        display();
+       }
+       function minusTwentyFive(){
+        if(guess<26 || numGuesses==0){}
+        else{guess-=25;}
+        display();
+       }
+ 
+       function commit(){
+// numGuesses--;
+// wild = Math.floor(Math.random() * 100) + 1;  //returns a random integer from 1 to 100
+//         mischevious = false;
+//         if(wild>=1 && wild<=5){mischevious = true;}
+//         posResponses = [' Very Hot', ' Hot', ' Very Warm', ' Warm', ' Cool', ' Very Cool', ' Cold', ' Very Cold']
+        // lie = posRepsonses[Math.floor(Math.random() * (Math.floor( - Math.ceil(0) + 1)) + min]
+ 
+        heat = Math.abs(answer-guess);
+        if(numGuesses==0){allResponses+= "   YOU LOST SORRY, heres the answer though: "+ answer;
+    gameEnded=true;}
+        else{
+       
+        allGuesses= allGuesses + " " + guess;
+ 
+        
+       
+        if(heat==0){ allResponses+= " You Win";
+        gameEnded=true;
+        }
+        else if(heat<=5){allResponses+= " Very Hot";
+ 
+        }
+        else if(heat>=6 && heat<=8){allResponses+= " Hot";
+        numGuesses--;
+    }
+        else if(heat>=9 && heat<=15){allResponses+= " Very Warm";
+        numGuesses--;
+    }
+        else if(heat>=16 && heat<=20){allResponses+= " Warm";
+        numGuesses--;
+    }
+        else if(heat>=21 && heat<=30){allResponses+= " Cool";
+        numGuesses--;
+    }
+        else if(heat>=31 && heat<=40){allResponses+= " Very Cool";
+        numGuesses--;
+    }
+        else if(heat>=41 && heat<=55){allResponses+= " Cold";
+        numGuesses--;
+    }
+        else if(heat>55){allResponses+= " Very Cold";
+        numGuesses--;
+    }
+}
+        // if(heat<=5){}
+        // else{
+        //     numGuesses--;
+        // }
+        // if(numGuesses==0){allResponses+= "   YOU LOST SORRY";}
+   
+       
+       
+       
+ 
+        display();
+
+        }
+ 
+       function reset()
+       {
+        answer = Math.floor(Math.random() * 100);
+        numGuesses = 5;
+        guess = 50;
+        allGuesses = " ";
+        allResponses = " ";
+        display();
+       }
+ 
+       function display()
+       {
+        numberOutput.innerHTML = "Your guess: " + guess;
+        
+        guessOutput.innerHTML = "Number of guesses: " + numGuesses;
+       
+        allGuessOutput.innerHTML = "Your previous guesses: "+ allGuesses;
+        allResponsesOutput.innerHTML = "Your reponses: "+ allResponses}
+       
+    </script>
+</head>
+<body onload = "initialize();">
+
+    <!-- I changed the background-color, added a media query that that shifts text to the side on mobile screen for more accessible viewing, 
+    changed color for those with color-blindness (accesibility 1), organized headings (acccessibiliity 2), created an alt tag for 
+    an image (accessibility 3), organized buttons (accessibility 4), gave link descriptive name (accessibility 5)   -->
+    <h1 id = "numberout"></h1>  
+    <h2 id = "numGuesses"></h1>
+    <img id="logo" alt="Guessing Game Picture" src ="https://www.gamesbrief.com/assets/2019/04/questions.jpg" width="100" height="100">
+    <h3 id="showGuesses"></h1>
+    <h3 id="responses"></h1>
+   
+    <hr />
+    <button class = "add" onclick = "addOne();">Add 1</button>
+    <button class = "add" onclick = "addFive();">Add 5</button>
+    <button class = "add" onclick = "addTen();">Add 10</button>
+    <button class = "add" onclick = "addTwentyFive();">Add 25</button>
+    <button class = "subtract" onclick = "minusOne();">Minus 1</button>
+    <button class = "subtract" onclick = "minusFive();">Minus 5</button>
+    <button class = "subtract" onclick = "minusTen();">Minus 10</button>
+    <button class = "subtract" onclick = "minusTwentyFive();">Minus 25</button>
+
+
+
+ 
+    <br />
+    <button id="reset" onclick = "reset();">Reset</button>
+    <button class = "important" onclick = "commit();">COMMIT</button>
+    <h5><a href ="https://gnrlwoundwort.github.io/Web-Development/Level%201/spec%20sheets/Level%201%20Hot%20and%20Cold.pdf">Rules Of The Game</a></h5>
+</body>
+</html>
